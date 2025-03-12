@@ -1,0 +1,821 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+}
+
+.background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    justify-content: space-between;
+}
+
+.sky {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    height: 90vh;
+    opacity: 0.3;
+}
+
+.grass {
+    position:absolute;
+    z-index: 3;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+}
+
+/* 树的通用样式*/  
+.Tree {
+    position: absolute; /* 定位方式为绝对定位 */
+    width: 100%; /* 宽度占满整个父容器 */
+    height: 100%; /* 高度占满整个父容器 */
+}
+
+
+  
+.lefttrees, .righttrees {
+    position: absolute; /* 使.lefttrees和.righttrees都使用绝对定位 */
+    bottom: 0; /* 定位到父容器的底部 */
+}
+  
+.lefttrees {
+    left: 0; /* 左下角对齐 */
+}
+  
+.righttrees {
+    right: 0%; /* 右下角对齐 */
+    top: 50%;  /* 将元素顶部对齐到父元素的中间位置 */
+    transform: translateY(-50%); /* 使用transform将元素垂直向上移动自身高度的50%，以实现垂直居中 */
+    z-index:4;
+}
+
+
+/* 树6的样式和动画 */
+.trees6 {
+    display: inline-block; /* 确保img可以应用transform属性 */
+    animation: shake 1s infinite; /* 添加晃动动画 */
+}
+
+.trees6:hover {
+    transform: scale(1.05); /* 在 hover 时放大 */
+    filter: drop-shadow(0 0 15px rgba(254, 255, 175, 0.8));
+}
+
+.trees6:active {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 0, 1));
+     /* 点击时更强的高光效果 */
+    transform: scale(1.1); /* 点击时进一步放大 */
+}
+
+.trees6 {
+    z-index:4;
+    margin-right: -50px;
+    margin-top: -80px;
+}
+
+.birds4 {
+    position: absolute;
+    top: 130px;
+    left: 100px;
+}
+
+.bird4, .bird5, .bird6 {
+    width: 60px;
+    margin: 10px;
+    opacity: 0; /* 初始透明 */
+    transform: scale(0); /* 初始缩小 */
+    animation-fill-mode: forwards; /* 保持动画结束后的状态 */
+    transition: transform 0.3s ease, filter 0.3s ease; /* 为高光和缩放效果添加过渡动画 */
+}
+
+.bird4 {
+    position: relative;
+    top: 60px;   /* 向上移动 */
+}
+
+.bird5 {
+    position: relative;
+    top: -30px;    /* 向下移动 */
+    left: 20px;  /* 向左移动 */
+    width: 20%;
+}
+
+.bird6 {
+    position: relative;
+    top: 5px;     /* 轻微向下移动 */
+    right: -50px;  /* 向右移动 */
+    width: 15%;
+}
+
+/* 定义蹦出来的动画 */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(50px); /* 初始缩小并位移 */
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.2) translateY(-10px); /* 先放大超出一点并向上移动 */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0); /* 最终恢复正常大小和位置 */
+    }
+}
+
+/* 为不同的鸟按顺序设置动画 */
+.bird4 {
+    animation: bounceIn 0.5s ease-out 0.1s forwards;
+}
+
+.bird5 {
+    animation: bounceIn 0.5s ease-out 0.3s forwards;
+}
+
+.bird6 {
+    animation: bounceIn 0.5s ease-out 0.5s forwards;
+}
+
+/* 悬停时的高光效果 */
+.bird4:hover, .bird5:hover, .bird6:hover, .bird7:hover,.bird8:hover, .bird9:hover, .bird10:hover {
+    filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8)); /* 使用 filter 实现亮度和阴影 */
+    transform: scale(1.1); /* 悬停时放大鸟 */
+}
+
+
+/* Pond hover and active styles */
+.pond {
+    z-index: 5;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+
+
+.pond:active {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(0, 150, 255, 1));
+}
+
+/* Reeds hover and active styles */
+.Reeds1, .Reeds2 {
+    cursor: pointer;
+    z-index: 5;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.Reeds1:hover, .Reeds2:hover {
+    transform: scale(5.05); /* 在 hover 时放大 */
+    filter: drop-shadow(0 0 15px rgba(254, 255, 175, 0.8)); /* 使用 drop-shadow */
+}
+
+.Reeds1:active, .Reeds2:active {
+    
+    transform: scale(1.1); /* 点击时进一步放大 */
+}
+
+/* Bird 7, 8, 9, and 10 initial styles */
+.bird7, .bird8, .bird9, .bird10 {
+    width: 60px;
+    opacity: 0; /* Initially transparent */
+    transform: scale(0); /* Initially scaled down */
+    animation-fill-mode: forwards; /* Keep the end state of the animation */
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.bird10 {
+    width: 100px;
+}
+
+/* Bounce-in animation */
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(50px); /* Start small and move up */
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.2) translateY(-10px); /* Slightly bigger with an overshoot */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0); /* Back to normal size */
+    }
+}
+
+/* Assign bounce-in animation to each bird */
+.bird7 {
+    animation: bounceIn 0.5s ease-out 0.1s forwards;
+}
+
+.bird8 {
+    animation: bounceIn 0.5s ease-out 0.3s forwards;
+}
+
+.bird9 {
+    animation: bounceIn 0.5s ease-out 0.1s forwards;
+}
+
+.bird10 {
+    animation: bounceIn 0.5s ease-out 0.1s forwards;
+}
+
+/* Hover effect for birds */
+
+
+/* 添加关闭按钮的样式 */
+.close-audio-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: rgb(37, 176, 146);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 100;
+}
+
+.close-audio-btn:hover {
+    background-color: rgb(4, 105, 76);
+}
+
+/* Leaf container positioned over the trees */
+#leaf-container {
+    position: absolute;
+    /* Adjust these values to position the leaves over the correct tree */
+    top: 50%;
+    left: 10%;
+    width: 300px; /* Adjust as needed */
+    height: 400px; /* Adjust as needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    z-index: 7;
+}
+
+.left-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px; /* 调整宽度以适应两列布局 */
+    /* height: 95vh; */
+    background-color: transparent;
+    display: flex;
+    flex-direction: row; /* 改为横向布局 */
+    flex-wrap: wrap; /* 允许内容自动换行 */
+    align-items: flex-start;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 30;
+}
+
+
+
+/* Updated box styles */
+.box.collectible {
+    width: calc(50% - 20px); /* 保持两列布局并考虑间距 */
+    height: 60px; /* 固定高度 */
+    background-color: rgba(255, 255, 220, 0.8); /* 背景色 */
+    border: 2px solid #fff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-left:10px;
+    margin-right:10px;
+    padding: 10px;
+    display: flex;
+    align-items: center; /* 垂直居中图片 */
+    justify-content: center; /* 水平居中图片 */
+    box-sizing: border-box; /* 包含边框和内边距 */
+}
+
+.box.collectible img {
+    max-width: 60%; /* 限制图片的最大宽度 */
+    max-height: 80px; /* 限制图片的最大高度 */
+    object-fit: contain; /* 使图片在容器内自适应 */
+    margin: 10px 0; /* 图片上下间距 */
+    transform: scale(0.8); /* 缩小图片，确保不溢出 */
+}
+
+
+
+
+/* Style for empty boxes */
+.box:nth-child(n+3) {
+    background-color: rgba(255, 255, 220, 0.8);
+    align-items: center;
+    justify-content: center;
+}
+
+/* Removes margin from the last box */
+.box:last-child {
+    margin-bottom: 0;
+}
+
+
+.feed-item {
+    max-width: 60%; /* 防止图片超出框 */
+    max-height: 60%; /* 防止图片超出框 */
+    object-fit: contain; /* 适应容器大小 */
+}
+
+/* Leaf styling */
+.leaf {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    transform-origin: center bottom;
+}
+
+/* Keyframes for shaking animation */
+@keyframes shake {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Apply shaking animation to leaves */
+.leaf.shake {
+    animation: shake 0.5s;
+}
+
+.leaf:hover {
+    transform: scale(1.1); /* 在 hover 时放大 */
+    filter: brightness(1.4) drop-shadow(0 0 15px rgba(254, 255, 175, 0.8)); /* 使用 drop-shadow */
+}
+
+/* Bird styling */
+.bird {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    display: none; /* 默认隐藏 */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* 添加过渡效果 */
+    z-index: 100; /* 设置 z-index 以确保不被覆盖 */
+    cursor: pointer; /* 鼠标悬停时显示手型指针 */
+}
+
+.bird7, .bird8, .bird9, .bird10 {
+
+    z-index: 100; /* 设置 z-index 以确保不被覆盖 */
+    cursor: pointer; /* 鼠标悬停时显示手型指针 */
+}
+
+.bird.fly {
+    display: block; /* 确保鸟显示 */
+    animation: fly-in 1s forwards; /* 使用飞入动画 */
+}
+
+/* 添加 hover 效果 */
+.bird:hover {
+   
+    filter: brightness(1.5) drop-shadow(0 0 20px rgba(254, 255, 175, 1)); /* 调整亮度和阴影 */
+    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out; /* 添加更快的过渡效果 */
+}
+
+/* Keyframes for bird flying in */
+@keyframes fly-in {
+    from { 
+        opacity: 0; 
+        transform: translateY(-50px); /* 从上方飞入 */
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); /* 停留在原位置 */
+    }
+}
+
+/* 保证 .bird.fly 显示并且有动画效果 */
+.bird.fly {
+    display: block; /* 确保鸟显示 */
+    animation: fly-in 1s forwards; /* 确保飞入动画只执行一次 */
+}
+
+
+.cloud_pond_sun {
+    width: 100%;
+    height: auto;
+    z-index: 9; /* 确保在最上层 */
+}
+
+.cloud {
+    position: absolute; /* 使用绝对定位 */
+    margin-top: 5%;
+    /* right: 20%; */
+    width: 100%;
+    z-index: 9; /* 确保在最高层 */
+}
+
+.cloud_cloud1 {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    bottom: 20px;
+    left: 20%;
+    width: 20%;
+   
+    margin-right: 10%;
+}
+
+.cloud_cloud2 {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    bottom: 20px;
+    right:80%;
+    width: 15%;
+    margin-left: 10%;
+}
+
+.sun {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    position: absolute;
+    top: 5%; /* 调整太阳的位置 */
+    left: 15%; /* 使太阳在画面的右上角 */
+    width: 8%; /* 根据需要调整太阳的大小 */
+    z-index: 9; /* 确保在最高层 */
+}
+
+
+
+.pond {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    position: absolute;
+    bottom: 20px;
+    right: 10%;
+    width: 25%;
+    z-index: 9;
+    animation: shake 1.2s ease infinite;
+}
+
+
+.pond:hover {
+    transform: scale(1.05); /* 在 hover 时放大 */
+    filter: drop-shadow(0 0 15px rgba(254, 255, 175, 0.8)); /* 使用 drop-shadow */
+}
+
+.ground {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto; /* Adjust as needed */
+}
+
+/* Positions Earthy at the bottom-left corner */
+.ground .earthy {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+/* Positions Flower at the bottom-right corner */
+.ground .flower {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+/* Positions Reeds1 slightly left of center */
+.ground .Reeds1 {
+    position: absolute;
+    bottom: 0;
+    left: 45%; /* Adjust this value to fine-tune the position */
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* Positions Reeds2 slightly right of center */
+.ground .Reeds2 {
+    position: absolute;
+    bottom: 0;
+    left: 55%; /* Adjust this value to fine-tune the position */
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+
+/* Updated box styles */
+.box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #000;
+    min-height: 50px;
+}
+
+/* Styles for Score box */
+.box.score {
+    width: 200px;
+    /* height: -20px; */
+    margin-bottom: 30px;
+    padding: 10px;
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #000;
+    /* min-height: 30px; */
+    box-sizing: border-box;
+    height: 10vh;
+    background-color: #fbf6c1;
+}
+
+
+
+/* Style for empty boxes */
+.box:nth-child(n+3) {
+    background-color: rgba(255, 255, 220, 0.8);
+}
+
+/* Removes margin from the last box */
+.box:last-child {
+    margin-bottom: 0;
+}
+
+.feed {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* Adjust based on your desired height */
+    z-index: 10;
+}
+
+.worm {
+    position: absolute;
+    width: 50px;
+    bottom:30%;
+    left: 21%;
+    display: none; /* Hidden initially */
+    z-index: 11;
+    cursor: move; 
+
+}
+
+@keyframes fly-in {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.worm.show {
+    display:block;
+    animation: fly-in 1s forwards;
+    opacity: 1; /* 完全不透明 */
+}
+
+.earthy2 {
+    position: absolute;
+    width: 30px; /* 设置宽度 */
+    height: 30px; /* 设置高度 */
+    left: 0;
+    bottom: 0;
+    transform-origin: center bottom;
+    top: 72%;
+    left: 23%;
+    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%);
+    transition: transform 0.5s ease-out;
+    cursor: pointer; */
+}
+
+/* Move animation */
+/* @keyframes moveAnimation {
+    0%   { transform: translate(-50%, -50%) translateY(0); opacity: 1; }
+    50%  { transform: translate(-50%, -50%) translateY(-50px); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) translateY(0); opacity: 1; }
+}
+
+.earthy2.move {
+    animation: moveAnimation 1s ease-in-out;
+} */
+
+/* @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+  
+  .earthy {
+    animation: shake 0.5s infinite;
+  } */
+  
+
+/* Optional hover effect for the worm */
+.worm:hover {
+    transform: translateX(-50%) scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(254, 255, 175, 0.8));
+    cursor: pointer;
+}
+
+/* .earthy2:hover {
+    transform: scale(1.05); /* 在 hover 时放大 */
+    /* filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); 使用 drop-shadow */
+/* } */
+
+/* Popup overlay */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed; /* Covers the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker and more vibrant */
+    z-index: 1000; /* Ensure it's on top */
+}
+
+/* Popup content */
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centered */
+    background-color: #ffe4b5; /* Light peach background */
+    padding: 25px;
+    border-radius: 15px; /* Rounded corners for a softer look */
+    width: 350px; /* Adjusted size */
+    max-width: 90%; /* Responsive on smaller screens */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* More noticeable shadow */
+    text-align: center; /* Center content */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font */
+    color: #333; /* Darker text color */
+    border: 3px solid #ffcc00; /* Bright yellow border */
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1002; /* Ensure close button is on top */
+    background: #ff6f61; /* Bright red background */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    border-radius: 50%; /* Circular shape */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, background 0.3s; /* Smooth transition on hover */
+}
+
+/* Close button hover effect */
+.close:hover {
+    transform: scale(1.1); /* Slightly larger on hover */
+    background: #ff8566; /* Slightly lighter red */
+}
+
+/* Popup header */
+.popup-content h2 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #e60073; /* A bright, playful color */
+}
+
+/* Popup body */
+#habitat-info {
+    font-size: 16px;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+
+/* Child-friendly overlay */
+.task-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Lighten the overlay for a less dark feel */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.task-overlay p {
+    color: #f06091; /* Use a playful pink */
+    font-family: 'Comic Sans MS', 'Chalkboard', sans-serif; /* Child-friendly font */
+    font-size: 2.5em; /* Slightly larger text */
+    font-weight: bold;
+    background-color: #fffdcf; /* Light yellow background */
+    padding: 20px 30px;
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 0 15px rgba(255, 192, 203, 0.7); /* Soft pink glow */
+    text-align: center;
+    border: 3px solid #f06091; /* Add a pink border for emphasis */
+    animation: pulse 1.5s infinite; /* Add a playful pulsing animation */
+}
+
+/* Animation to make the text gently grow and shrink */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05); /* Slightly grow */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.trees1 {
+    z-index: 5;
+    margin-left: -420px;
+    margin-top: -500px;
+}
+
+/* 树1的样式和动画 */
+.trees1 {
+    display: inline-block; /* 确保img可以应用transform属性 */
+    animation: shake 1s infinite;
+}
+
+.trees1:hover {
+    box-shadow: 0 0 15px 5px rgba(255, 215, 0, 0.8); /* 添加高光效果 */
+    transform: scale(1.05); /* 悬停时稍微放大 */
+}
+
+.trees1:active {
+    box-shadow: 0 0 20px 10px rgba(255, 255, 0, 1); /* 点击时更强的高光效果 */
+    transform: scale(1.1); /* 点击时进一步放大 */
+}
+
+
+
+.trees5 {
+    z-index: 6;
+    margin-top: 500px;
+}
+
+/* 晃动动画 */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-20px);
+    }
+    75% {
+        transform: translateX(20px);
+    }
+}
+
+

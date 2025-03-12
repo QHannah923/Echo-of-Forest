@@ -1,0 +1,566 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+}
+
+.background {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    justify-content: space-between;
+}
+
+.sky {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}
+
+.mountain {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    height: 90vh;
+    opacity: 0.3;
+}
+
+.grass {
+    position:absolute;
+    z-index: 3;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40vh;
+}
+
+/* 树的通用样式*/  
+.Tree {
+    position: absolute; /* 定位方式为绝对定位 */
+    width: 100%; /* 宽度占满整个父容器 */
+    height: 100%; /* 高度占满整个父容器 */
+}
+  
+.lefttrees, .righttrees {
+    position: absolute; /* 使.lefttrees和.righttrees都使用绝对定位 */
+    bottom: 0; /* 定位到父容器的底部 */
+}
+  
+.lefttrees {
+    left: 0; /* 左下角对齐 */
+}
+  
+.righttrees {
+    right: 0; /* 右下角对齐 */
+    top: 50%;  /* 将元素顶部对齐到父元素的中间位置 */
+    transform: translateY(-50%); /* 使用transform将元素垂直向上移动自身高度的50%，以实现垂直居中 */
+    z-index:4;
+}
+
+.trees1 {
+    z-index: 5;
+    margin-left: -420px;
+    margin-top: -500px;
+}
+
+.trees5 {
+    z-index: 6;
+    margin-top: 500px;
+}
+
+.trees6 {
+    z-index:4;
+    margin-right: -50px;
+    margin-top: -80px;
+}
+
+/* Leaf container positioned over the trees */
+#leaf-container {
+    position: absolute;
+    /* Adjust these values to position the leaves over the correct tree */
+    top: 50%;
+    left: 10%;
+    width: 300px; /* Adjust as needed */
+    height: 400px; /* Adjust as needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    z-index: 7;
+}
+
+/* Leaf styling */
+.leaf {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transform-origin: center bottom;
+}
+
+/* Keyframes for shaking animation */
+@keyframes shake-leaf {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Apply shaking animation to leaves */
+.leaf.shake {
+    animation: shake 0.5s;
+}
+
+.leaf:hover {
+    transform: scale(1.1); /* 在 hover 时放大 */
+    filter: brightness(1.4) drop-shadow(0 0 15px rgba(254, 255, 175, 0.8)); /* 使用 drop-shadow */
+}
+
+/* Bird styling */
+.bird {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    display: none; /* 默认隐藏 */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* 添加过渡效果 */
+    z-index: 10; /* 设置 z-index 以确保不被覆盖 */
+    cursor: pointer; /* 鼠标悬停时显示手型指针 */
+}
+
+.bird.fly {
+    display: block; /* 确保鸟显示 */
+    animation: fly-in 1s forwards; /* 使用飞入动画 */
+}
+
+/* 添加 hover 效果 */
+.bird:hover {
+    transform: scale(1.3) rotate(15deg); /* 放大并旋转 */
+    filter: brightness(1.5) drop-shadow(0 0 20px rgba(254, 255, 175, 1)); /* 调整亮度和阴影 */
+    transition: transform 0.2s ease-in-out, filter 0.2s ease-in-out; /* 添加更快的过渡效果 */
+}
+
+/* Keyframes for bird flying in */
+@keyframes fly-in {
+    from { 
+        opacity: 0; 
+        transform: translateY(-50px); /* 从上方飞入 */
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); /* 停留在原位置 */
+    }
+}
+
+/* 保证 .bird.fly 显示并且有动画效果 */
+.bird.fly {
+    display: block; /* 确保鸟显示 */
+    animation: fly-in 1s forwards; /* 确保飞入动画只执行一次 */
+}
+
+.cloud_pond_sun {
+    width: 100%;
+    height: auto;
+    z-index: 9; /* 确保在最上层 */
+}
+
+.cloud {
+    position: absolute; /* 使用绝对定位 */
+    margin-top: 5%;
+    /* right: 20%; */
+    width: 100%;
+    z-index: 9; /* 确保在最高层 */
+}
+
+.cloud_cloud1 {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    bottom: 20px;
+    left: 20%;
+    width: 20%;
+   
+    margin-right: 10%;
+}
+
+.cloud_cloud2 {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    bottom: 20px;
+    right:80%;
+    width: 15%;
+    margin-left: 10%;
+}
+
+.sun {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    position: absolute;
+    top: 5%; /* 调整太阳的位置 */
+    left: 15%; /* 使太阳在画面的右上角 */
+    width: 8%; /* 根据需要调整太阳的大小 */
+    z-index: 9; /* 确保在最高层 */
+}
+
+.pond {
+    pointer-events: visiblePainted;
+    transition: transform 0.3s;
+    position: absolute;
+    bottom: 20px;
+    right: 10%;
+    width: 25%;
+    z-index: 9;
+}
+
+.pond:hover {
+    transform: scale(1.05); /* 在 hover 时放大 */
+    filter: drop-shadow(0 0 15px rgba(254, 255, 175, 0.8)); /* 使用 drop-shadow */
+}
+
+.ground {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto; 
+    z-index: 10; /* 确保在最高层 */
+}
+
+/* 晃动动画 */
+@keyframes shake {
+    0%, 10% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-20px);
+    }
+    50% {
+        transform: translateX(20px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+/* Earthy 图片的样式 */
+.earthy {
+    display: inline-block; /* 确保图片能够应用 transform */
+    animation: shake 0.5s ease-in-out infinite; /* 3秒一循环, 使晃动后有停顿 */
+}
+
+/* 悬停时的高光效果 */
+.earthy:hover {
+    transform: scale(1.05); /* 悬停时稍微放大 */
+    filter: drop-shadow(0 0 15px rgba(255, 255, 150, 0.8)); /* 添加高光效果 */
+}
+
+/* 点击时的高光效果 */
+.earthy:active {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 1)); /* 更强的高光效果 */
+    transform: scale(1.1); /* 点击时进一步放大 */
+}
+
+.earthworms {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 1; /* 确保 earthworms 位于 earthy 的后面 */
+    width: 100px; /* 与 earthy 保持一致 */
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px); /* 初始位置稍微向下 */
+}
+
+.show-earthworms {
+    display: block; /* 确保元素可见 */
+    opacity: 1;
+    transform: translateY(0); /* 回到原位 */
+}
+
+/* Positions Flower at the bottom-right corner */
+.ground .flower {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+}
+
+/* Positions Reeds1 slightly left of center */
+.ground .Reeds1 {
+    position: absolute;
+    bottom: 0;
+    left: 45%; /* Adjust this value to fine-tune the position */
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* Positions Reeds2 slightly right of center */
+.ground .Reeds2 {
+    position: absolute;
+    bottom: 0;
+    left: 55%; /* Adjust this value to fine-tune the position */
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* 定义晃动动画 */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px); /* 左晃动 10px */
+    }
+    75% {
+        transform: translateX(10px);  /* 右晃动 10px */
+    }
+}
+
+/* Earthy 图片的样式 */
+.earthy {
+    display: inline-block; /* 确保图片能够应用 transform */
+    animation: shake 1s infinite; /* 添加晃动动画，1秒周期，持续晃动 */
+    transition: transform 0.3s ease, filter 0.3s ease; /* 添加平滑过渡效果 */
+}
+
+/* 悬停时的高光效果 */
+.earthy:hover {
+    transform: scale(1.05); /* 悬停时稍微放大 */
+    filter: drop-shadow(0 0 15px rgba(255, 255, 150, 0.8)); /* 添加高光效果 */
+}
+
+/* 点击时的高光效果 */
+.earthy:active {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 1)); /* 更强的高光效果 */
+    transform: scale(1.1); /* 点击时进一步放大 */
+}
+
+.hidden {
+    display: none;
+}
+
+.left-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 50vh;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 10;
+}
+
+/* Updated box styles */
+.box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 15px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #000;
+    min-height: 50px;
+}
+
+/* Styles for Score box */
+.box.score {
+    height: 20vh;
+    background-color: #fbf6c1;
+}
+
+/* Styles for Feed box */
+.box.feeds {
+    height: 20vh;
+    background-color: #fbf6c1;
+}
+
+/* Style for empty boxes */
+.box:nth-child(n+3) {
+    background-color: rgba(255, 255, 220, 0.8);
+}
+
+/* Removes margin from the last box */
+.box:last-child {
+    margin-bottom: 0;
+}
+
+.feed {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    height: 100px; /* Adjust based on your desired height */
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.worm {
+    position: absolute;
+    width: 50px;
+    bottom:30%;
+    left: 21%;
+    display: none; /* Hidden initially */
+    z-index: 11;
+    cursor: move; 
+
+}
+
+/* @keyframes fly-in {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+} */
+
+/* .worm.show {
+    display:block;
+    animation: fly-in 1s forwards;
+    opacity: 1; /* 完全不透明 */
+/* } */ 
+
+/* .earthy2 {
+    position: absolute;
+    width: 30px; /* 设置宽度 */
+    /* height: 30px; /* 设置高度 */
+    /* left: 0;
+    bottom: 0;
+    transform-origin: center bottom;
+    top: 72%;
+    left: 23%;
+    transform: translate(-50%, -50%);
+} */ 
+
+/* Move animation */
+/* @keyframes moveAnimation {
+    0%   { transform: translate(-50%, -50%) translateY(0); opacity: 1; }
+    50%  { transform: translate(-50%, -50%) translateY(-50px); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) translateY(0); opacity: 1; }
+}
+
+.earthy2.move {
+    animation: moveAnimation 1s ease-in-out;
+} */
+
+/* @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-10px);
+    }
+    75% {
+      transform: translateX(10px);
+    }
+  }
+  
+  .earthy {
+    animation: shake 0.5s infinite;
+  }
+   */
+
+   /* Optional hover effect for the worm */
+/* .worm:hover {
+    transform: translateX(-50%) scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(254, 255, 175, 0.8));
+    cursor: pointer;
+} */
+
+/* .earthy2:hover {
+    transform: scale(1.05); /* 在 hover 时放大 */
+    /* filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); 使用 drop-shadow */
+/* } */
+
+/* Popup overlay */
+.popup {
+    display: none; /* Initially hidden */
+    position: fixed; /* Covers the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker and more vibrant */
+    z-index: 1000; /* Ensure it's on top */
+}
+
+/* Popup content */
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centered */
+    background-color: #ffe4b5; /* Light peach background */
+    padding: 25px;
+    border-radius: 15px; /* Rounded corners for a softer look */
+    width: 350px; /* Adjusted size */
+    max-width: 90%; /* Responsive on smaller screens */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* More noticeable shadow */
+    text-align: center; /* Center content */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font */
+    color: #333; /* Darker text color */
+    border: 3px solid #ffcc00; /* Bright yellow border */
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1002; /* Ensure close button is on top */
+    background: #ff6f61; /* Bright red background */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    border-radius: 50%; /* Circular shape */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, background 0.3s; /* Smooth transition on hover */
+}
+
+/* Close button hover effect */
+.close:hover {
+    transform: scale(1.1); /* Slightly larger on hover */
+    background: #ff8566; /* Slightly lighter red */
+}
+
+/* Popup header */
+.popup-content h2 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #e60073; /* A bright, playful color */
+}
+
+/* Popup body */
+#habitat-info {
+    font-size: 16px;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Echoes of the Forest</title>
+
+    <script src="js/drag.js"></script>
+    <!-- <link rel="stylesheet" href="habitat.css"> -->
+    <link rel="stylesheet" href="feed new.css">
+
+    <!-- <style>
+    
+    @keyframes shake-earthy {
+            0%, 100% {
+                transform: translateX(0);
+            }
+            
+            25% {
+                transform: translateX(-5px);
+            }
+            
+            75% {
+                transform: translateX(5px);
+            }
+        }
+                
+        .earthy {
+            display: inline-block;
+            animation: shake-earthy 1s infinite;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+            filter: brightness(1.2);
+            z-index: 100;
+            position: relative;
+        }
+        
+        img.earthy:hover {
+            transform: scale(1.1); 
+            box-shadow: 0 0 15px 5px rgba(0, 255, 0, 0.8);
+            filter: brightness(1.5); 
+        } -->
+
+        <!-- /* .earthy:active {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px 10px rgba(255, 255, 0, 1);
+            filter: brightness(1.5);
+        } */ -->
+
+    <!-- </style> -->
+    
+    </head>
+
+<body>
+    <!-- <audio id="background-music" src="audio/breath_underwater.ogg" autoplay loop muted></audio> -->
+
+    
+    <audio id="birdsound1" src="media/birdsound1.mp3"></audio>
+    
+    <div class="container">             
+        
+        <div class="background">
+            <img src="images/sky.png" class="sky" alt="Sky Background">
+            <img src="images/mountain.png" class="mountain" alt="Mountain">
+            <img src="images/grass.png" class="grass" alt="Grass">
+        </div>
+
+        <div class="Tree">
+
+            <div class="lefttrees">
+                <img src="images/trees5.png" class="trees5" alt="Trees">
+                <img src="images/trees1.png" class="trees1" alt="Trees">
+            </div>
+
+            <div class="righttrees">
+                <img src="images/trees6.png" class="trees6" alt="Trees">
+            </div>
+        
+        </div>
+
+        <div class="cloud_pond_sun">
+            <div class="cloud">
+                <img src="images/Clouds 1.png" class="cloud_cloud1" alt="Cloud 1">
+                <img src="images/Clouds 2.png" class="cloud_cloud2" alt="Cloud 2">
+                <!-- <img src="images/Clouds 3.png" class="cloud_cloud3" alt="Cloud 3"> -->
+            </div>
+
+            <img src="images/sun.png" class="sun" alt="Sun">
+            
+            <img src="images/pond.png" class="pond" alt="Pond">
+
+        
+            
+
+        </div>  
+
+        <div id="leaf-container">
+            <!-- Leaves positioned on the tree -->
+            <img src="images/leaf1.pic.jpg" class="leaf shake" id="leaf1" style="top: 50px; left: 100px;">
+            <img src="images/leaf2.pic.jpg" class="leaf" id="leaf2" style="top: 80px; left: 120px;">
+            <img src="images/leaf3.pic.jpg" class="leaf" id="leaf3" style="top: 70px; left: 150px;">
+            <img src="images/leaf4.pic.jpg" class="leaf" id="leaf4" style="top: 60px; left: 180px;">
+            <img src="images/leaf5.pic.jpg" class="leaf" id="leaf5" style="top: 90px; left: 200px;">
+            <!-- Add more leaves as needed -->
+    
+            <!-- Birds positioned off-screen initially -->
+            <img src="images/Lyrebird.png" class="bird" id="feed1" style="top: 0px; left: 110px;">
+            
+            <!-- Add more birds as needed -->
+        </div>
+
+        <div class="left-sidebar">
+            <!-- <div class="box score">Score 0</div> -->
+            <div class="box feeds">Feeds /10</div>
+            <div class="box collectible"></div>
+            <div class="box collectible"></div>
+            <div class="box collectible"></div>
+            <div class="box collectible"></div>
+            <div class="box collectible"></div>
+
+        </div>
+
+        <div class="ground">
+            <img src="images/earthy.png" class="earthy" alt="Earthy Image">
+            <img src="images/Lyrebirds - earthworms.png" class="earthworms hidden" id="earthworms" alt="Earthworms">
+            
+            <img src="images/flower.png" class="flower" alt="flower">
+            <img src="images/Reeds 1.png" class="Reeds1" alt="Reed">
+            <img src="images/Reeds 2.png" class="Reeds2" alt="Reed">
+        </div>
+
+        <div class="feed" id="feed">
+            <!-- <img src="images/Lyrebirds - earthworms.png" class="feed-item hidden" alt="feed1"> -->
+            <img src="images/canaries - grass seed.png" class="feed-item hidden" alt="feed2" style="display:none;">
+        </div>
+
+        <!-- <div class="feed" id="feed">
+            <img src="images/Lyrebirds - earthworms.png" class="worm" alt="Worm" id="worm" draggable="true">
+            <img src="images/earthy1.png" class="earthy1" alt="picesofearthy"> -->
+            <!-- <img src="images/earthy2.png" class="earthy2" alt="picesofearthy">
+        </div> -->
+
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span id="closepopup" class="close">&times;</span>
+                <h2>Lyrebird</h2>
+                <div id="habitat-info">Loading habitat information...</div>
+            </div>
+        </div>
+
+    </div>
+    <!-- <script src="js/worm.js"></script> -->
+    <script src="js/feed.js"></script>
+    <script src="js/show.js"></script>
+    <!-- <script src="api.js"></script> -->
+
+    <script>
+        // earthy hightlight
+//         document.addEventListener('DOMContentLoaded', function() {
+//     var earthy = document.querySelector('.earthy');
+//     var feeds = document.querySelectorAll('.feed');
+    
+//     earthy.addEventListener('click', function() {
+//       console.log('Earthy clicked'); 
+//       this.classList.toggle('highlight'); 
+      
+//       feeds.forEach(function(feed) {
+//         if (feed.style.display === 'none') {
+//           feed.style.display = 'block';
+//         } else {
+//           feed.style.display = 'none';
+//         }
+//         console.log(feed.alt + ' display: ' + feed.style.display); 
+//       });
+//     });
+//   });
+      </script>
+      
+    <script>
+        function fetchLyrebirdInfo() {
+            const apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&titles=Lyrebird&format=json&origin=*';
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const pages = data.query.pages;
+                    const pageId = Object.keys(pages)[0];
+                    const extract = pages[pageId].extract;
+
+                    // Extract habitat information
+                    const habitatInfo = extractHabitatInfo(extract);
+
+                    // Display the habitat information
+                    displayHabitatInfo(habitatInfo);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function extractHabitatInfo(text) {
+            // Regular expression to find the 'Distribution and habitat' section
+            const habitatRegex = /==\s*Diet and feeding\s*==([\s\S]*?)(?=\n==)/;
+            const match = text.match(habitatRegex);
+            return match ? match[1].trim() : 'No specific habitat information found.';
+            console.log(match);
+            
+        }
+
+        function displayHabitatInfo(info) {
+            //console.log(habitatInfo);
+            const container = document.getElementById('habitat-info');
+            container.innerHTML = `<p>${info.replace(/\n\n/g, '</p ><p>')}</p >`;
+        }
+
+        // Fetch the information when the page loads
+        fetchLyrebirdInfo();
+
+    </script>
+
+    
+</body>
+</html>
+

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Echoes of the Forest</title>
+
+        <link rel="stylesheet" href="feed.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <script src="js/drag.js"></script>
+
+    </head>
+
+<body>
+
+    <div id="gameRulesModal" class="modal">
+        <div class="modal-content">
+            <span id="closeBtn" class="close">&times;</span>
+
+            <p>Welcome to the world of <strong>Echoes of the Forest!</strong> Here, you'll become a little explorer, learning lots of fun facts about birds. Now, your adventure begins! Let's help the birds find their favorite food!</p>
+
+            <p>In the forest, there are many birds hiding, and they love different kinds of food. You can click, observe, and find fruits, bugs, and seeds hidden in the bushes, on the ground, and near the river. Every time you find a piece of food, you'll unlock a fun fact, teaching you what this bird likes to eat, where it lives, and how it behaves.</p>
+            
+            <p>Are you ready? Let's explore the secrets of the forest together and make the birds happy by feeding them their favorite snacks.</p>
+
+            <button id="exploreBtn" style="background-color: yellow;">Explore</button>
+        </div>
+    </div>
+
+    
+    <div class="container"> 
+        
+        <div>
+            <button id="playButton" onclick="togglePlayPause()">
+                <i id="playPauseIcon" class="fas fa-play"></i> 
+            </button>
+    
+        <!-- Audio -->
+            <audio id="backgroundMusic" loop>
+                <source src="audio/Upbeat Happy Piano.mp3" type="audio/mp3">
+            </audio>
+        
+            <script>
+                var audio = document.getElementById('backgroundMusic');
+                var playPauseIcon = document.getElementById('playPauseIcon');
+            
+                function togglePlayPause() {
+                    if (audio.paused) {
+                        audio.play();
+                        playPauseIcon.className = 'fas fa-pause'; 
+                    } else {
+                        audio.pause();
+                        playPauseIcon.className = 'fas fa-play'; 
+                    }
+                }
+            </script>
+            
+        </div>
+        
+        <div class="background">
+
+            <img src="images/sky.png" class="sky" alt="Sky Background">
+            <img src="images/mountain.png" class="mountain" alt="Mountain">
+            <img src="images/grass.png" class="grass" alt="Grass">
+        </div>
+
+        <div class="Tree">
+
+            <div class="lefttrees">
+                <img src="images/trees5.png" class="trees5" id="trees5" alt="Trees">
+                <img src="images/trees1.png" class="trees1" id="trees1" alt="Trees">
+                <img src="images/Great Bowerbirds - berries.png" class="berry hidden feed-item" id="berry" alt="Trees">
+            </div>
+
+            <div class="righttrees">
+                <img src="images/trees6.png" class="trees6" alt="Trees">
+            </div>
+        
+        </div>
+
+        <div class="cloud_pond_sun">
+            <div class="cloud">
+                <img src="images/Clouds 1.png" class="cloud_cloud1" alt="Cloud 1">
+                <img src="images/Clouds 2.png" class="cloud_cloud2" id="cloud_cloud2" alt="Cloud 2">
+                <img src="images/pied butcherbirds - Small birds.png" class="smallbirds hidden feed-item" id="smallbirds" alt="smallbirds">
+
+            </div>
+
+            <img src="images/sun.png" class="sun" alt="Sun">
+            
+            <img src="images/pond.png" class="pond" alt="Pond">
+            <img src="images/Cormorants - fish.png" class="fish hidden feed-item" id="fish" alt="Fish">
+            <img src="images/Brolga - frog.png" class="frog hidden feed-item" id="frog" alt="frog">
+        </div>  
+
+        <img src="images/Ducks - aquatic plant.png" class="aquatic_plant hidden feed-item" id="aquaticPlant" alt="Aquatic Plant">
+
+        
+
+        <div class="left-sidebar">
+
+            <div class="box feeds" id="feeds">Feed: /10</div>
+            <!-- <button id="nextPageButton" style="display: none;">Find Birds</button> -->
+
+            <div class="box collectible" id="box1"></div>
+            <div class="box collectible" id="box2"></div>
+            <div class="box collectible" id="box3"></div>
+            <div class="box collectible" id="box4"></div>
+            <div class="box collectible" id="box5"></div>
+
+            <div class="box collectible" id="box6"></div>
+            <div class="box collectible" id="box7"></div>
+            <div class="box collectible" id="box8"></div>
+            <div class="box collectible" id="box9"></div>
+            <div class="box collectible" id="box10"></div>
+
+        </div>
+
+        <div class="habitat">
+            <img src="images/grass2.png" class="grass2" id="grass2" alt="Grass2">
+            <img src="images/mammal.png" class="mammal hidden feed-item" id="mammal" alt="mammal"> 
+        </div>
+
+        <div class="ground">
+            <img src="images/earthy.png" class="earthy" id="earthy" alt="Earthy Image">
+            <img src="images/Lyrebirds - earthworms.png" class="earthworms hidden feed-item" id="earthworms" alt="Earthworms">
+            <img src="images/canaries - grass seed.png" class="seed hidden feed-item" id="seed" alt="grass seed">
+
+            <img src="images/flower.png" class="flower" id="flower" alt="flower">
+            <img src="images/Honeyeaters - nectar.png" class="nectar hidden feed-item" id="nectar" alt="nectar">
+            <img src="images/reed warblers - greenfly.png" class="greenfly hidden feed-item" id="greenfly" alt="greenfly">
+            
+        </div>
+
+        <button id="nextPageButton" style="display: none;">Find Birds</button>
+
+    </div>
+
+
+    <script src="js/rule.js"></script>
+    <script src="js/pond.js"></script>
+    <script src="js/stop.js"></script>
+    <script src="js/button.js"></script>
+      
+    <script>
+        function fetchLyrebirdInfo() {
+            const apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext&titles=Lyrebird&format=json&origin=*';
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const pages = data.query.pages;
+                    const pageId = Object.keys(pages)[0];
+                    const extract = pages[pageId].extract;
+
+                    // Extract habitat information
+                    const habitatInfo = extractHabitatInfo(extract);
+
+                    // Display the habitat information
+                    displayHabitatInfo(habitatInfo);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function extractHabitatInfo(text) {
+            // Regular expression to find the 'Distribution and habitat' section
+            const habitatRegex = /==\s*Diet and feeding\s*==([\s\S]*?)(?=\n==)/;
+            const match = text.match(habitatRegex);
+            return match ? match[1].trim() : 'No specific habitat information found.';
+            console.log(match);
+            
+        }
+
+        function displayHabitatInfo(info) {
+            //console.log(habitatInfo);
+            const container = document.getElementById('habitat-info');
+            container.innerHTML = `<p>${info.replace(/\n\n/g, '</p ><p>')}</p >`;
+        }
+
+        // Fetch the information when the page loads
+        fetchLyrebirdInfo();
+
+    </script>
+
+    
+</body>
+</html>
+

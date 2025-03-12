@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Echoes of the Forest</title>
+        <link rel="stylesheet" href="bird.css">
+    </head>
+    <body>
+
+        
+        <!-- <audio id="birdsound1" src="media/birdsound1.mp3"></audio> -->
+        <div class="container">             
+            <div class="background">
+                <img src="images/sky.png" class="sky" alt="Sky Background">
+                <img src="images/mountain.png" class="mountain" alt="Mountain">
+                <img src="images/grass.png" class="grass" alt="Grass">
+            </div>
+
+            <div class="Tree">
+                <div class="lefttrees">
+                    <img src="images/trees5.png" class="trees5" alt="Trees" >
+                    <img src="images/trees1.png" class="trees1" alt="Trees" >
+                </div>
+                <div class="righttrees">
+                    <img src="images/trees6.png" class="trees6" alt="Trees">
+                    
+                    <!-- 隐藏的鸟图片 -->
+                    <div class="birds4" style="display: none;">
+                        <img src="images/birds/Canary.png" class="bird" data-bird="Canary">
+                        <img src="images/birds/Pied Butcherbird.png" class="bird" data-bird="Pied_butcherbird">
+                        <img src="images/birds/Honeyeater.png" class="bird" data-bird="Honeyeater">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 音频元素 -->
+            <audio id="birdAudio" controls style="display:none;"></audio>
+
+            <!-- 关闭声音按钮 -->
+            <button class="close-audio-btn" id="closeAudioBtn">Close sound</button>
+
+            <div class="cloud_pond_sun">
+                <div class="cloud">
+                    <img src="images/Clouds 1.png" class="cloud_cloud1" alt="Cloud 1">
+                    <img src="images/Clouds 2.png" class="cloud_cloud2" alt="Cloud 2">
+                    <!-- <img src="images/Clouds 3.png" class="cloud_cloud3" alt="Cloud 3"> -->
+                </div>
+                <img src="images/sun.png" class="sun" alt="Sun">            
+                <img src="images/pond.png" class="pond" alt="Pond">
+
+                <!-- Duck and Cormorant -->
+                <img src="images/birds/Duck.png" id="bird7" class="bird" data-bird="Duck" style="bottom: 80px; right: 200px; position: absolute; display: none;">
+                <img src="images/birds/Cormorant.png" id="bird8" class="bird" data-bird="Cormorant" style="bottom: 150px; right: 90px; position: absolute; display: none;">
+            </div>  
+
+            <div id="leaf-container">
+                <!-- Leaves positioned on the tree -->
+                <img src="images/leaf1.pic.jpg" class="leaf" id="leaf1" style="top: 90px; left: 90px;">
+                <img src="images/leaf2.pic.jpg" class="leaf" id="leaf2" style="top: 80px; left: 120px;">
+                <img src="images/leaf3.pic.jpg" class="leaf" id="leaf3" style="top: 100px; left: 150px;">
+                <img src="images/leaf4.pic.jpg" class="leaf" id="leaf4" style="top: 120px; left: 220px;">
+                <img src="images/leaf5.pic.jpg" class="leaf" id="leaf5" style="top: 150px; left: 250px;">
+                <!-- Add more leaves as needed -->
+        
+                <!-- Birds positioned off-screen initially -->
+                <img src="images/birds/Lyrebird.png" class="bird" id="bird1" data-bird="Lyrebird" style="top: 130px; left: 100px; transform: scale(1.5);">
+                <img src="images/birds/Great Bowerbird.png" class="bird" id="bird2" data-bird="Great_bowerbird" style="top: 170px; left: 200px; transform: scale(1.5);">
+                <img src="images/birds/Magpie.png" class="bird" id="bird3" data-bird="Magpie" style="top: 60px; left: 210px; transform: scale(1.5);">
+                
+                
+                <!-- Add more birds as needed -->
+            </div>
+
+            <div class="left-sidebar">
+                <div class="box score">Score: /10</div>
+
+                <div class="box collectible" id="box1">
+                    <img src="images/Lyrebirds - earthworms.png" class="feed-item" id="earthworms" alt="Earthworms">
+                </div>
+                <div class="box collectible" id="box2">
+                    <img src="images/canaries - grass seed.png" class="feed-item" id="seed" alt="grass seed">
+                </div>
+                <div class="box collectible" id="box3">
+                    <img src="images/Honeyeaters - nectar.png" class="feed-item" id="nectar" alt="nectar">
+                </div>
+                <div class="box collectible" id="box4">
+                    <img src="images/reed warblers - greenfly.png" class="feed-item" id="greenfly" alt="greenfly">
+                </div>
+                <div class="box collectible" id="box5">
+                    <img src="images/Cormorants - fish.png" class="feed-item" id="fish" alt="Fish">
+                </div>
+                <div class="box collectible" id="box6">
+                    <img src="images/pied butcherbirds - Small birds.png" class="feed-item" id="smallbirds" alt="smallbirds">
+                </div>
+                <div class="box collectible" id="box7">
+                    <img src="images/Great Bowerbirds - berries.png" class="feed-item" id="berry" alt="Trees">
+                </div>
+                <div class="box collectible" id="box8">
+                    <img src="images/Ducks - aquatic plant.png" class="feed-item" id="aquaticPlant" alt="Aquatic Plant">
+                </div>
+                <div class="box collectible" id="box9">
+                    <img src="images/Brolga - frog.png" class="feed-item" id="frog" alt="frog">
+                </div>
+                <div class="box collectible" id="box10">
+                    <img src="images/mammal.png" class="feed-item" id="mammal" alt="mammal"> 
+                </div>
+            </div>
+
+            <div class="ground">
+                <img src="images/earthy.png" class="earthy" alt="Earthy">
+                <img src="images/flower.png" class="flower" alt="flower">
+                <img src="images/Reeds 1.png" class="Reeds1" alt="Reed" style="position: absolute; bottom: 1px; right: 600px;">
+                <img src="images/Reeds 2.png" class="Reeds2" alt="Reed" style="position: absolute; bottom: 1px; right: 750px;">
+
+                <!-- Brolga and Reed Warbler -->
+                <img src="images/birds/Brolga.png" id="bird9" class="bird" data-bird="Brolga" style="bottom: 30px; right: 750px; position: absolute; display: none;">
+                <img src="images/birds/Reed Warbler.png" id="bird10" class="bird" data-bird="Reed Warbler" style="bottom: 30px; right: 600px; position: absolute; display: none;">
+            </div>
+            <!-- Popup -->
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span id="closepopup" class="close">&times;</span>
+                    <h2 id="bird-title"></h2>
+                    <div id="bird-info"></div>
+                </div>
+            </div>
+
+        <script>
+
+        console.log("Script is running");
+        // Function to fetch bird information from API
+        async function fetchBirdInfoFromAPI(birdName) {
+            // Format bird name for Wikipedia (replace spaces with underscores)
+            const formattedBirdName = birdName.replace(/ /g, '_');
+
+            
+            try {
+                const response = await fetch(`api.php?bird=${encodeURIComponent(formattedBirdName)}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return extractBirdInfo(data);
+            } catch (error) {
+                console.error('Error fetching bird info:', error);
+                throw error;
+            }
+        }
+
+        function extractBirdInfo(data, birdName) {
+            const pages = data.query.pages;
+            const pageId = Object.keys(pages)[0];
+            
+            if (pageId === '-1' || !pages[pageId].extract) {
+                return getFallbackInfo(birdName);
+            }
+            
+            const extract = pages[pageId].extract;
+            
+            // Try to find the "Diet and feeding" section
+            const dietRegex = /==\s*Diet and feeding\s*==([\s\S]*?)(?=\n==)/;
+            const dietMatch = extract.match(dietRegex);
+            
+            if (dietMatch) {
+                // Return the first two sentences of the diet section
+                const sentences = dietMatch[1].split('.').slice(0, 2).join('.').trim() + '.';
+                return sentences;
+            } else {
+                // If no diet section, return the first two sentences of the extract
+                const generalInfoRegex = /^(.+?\.)\s*(.+?\.)?/;
+                const generalMatch = extract.match(generalInfoRegex);
+                return generalMatch ? generalMatch[0] : getFallbackInfo(birdName);
+            }
+        }
+
+        
+
+        function displayBirdInfo(birdName, info) {
+            const titleElement = document.getElementById('bird-title');
+            const infoElement = document.getElementById('bird-info');
+            titleElement.textContent = birdName;
+            infoElement.innerHTML = `<p>${info}</p>`;
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('[data-bird]').forEach(birdElement => {
+                birdElement.addEventListener('click', async function() {
+                    const birdName = this.getAttribute('data-bird');
+                    try {
+                        const info = await fetchBirdInfo(birdName);
+                        displayBirdInfo(birdName, info);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        displayBirdInfo(birdName, 'Failed to load bird information.');
+                    }
+                });
+            });
+
+            document.getElementById('closepopup').addEventListener('click', closePopup);
+            window.addEventListener('click', (event) => {
+                if (event.target === document.getElementById('popup')) {
+                    closePopup();
+                }
+            });
+        });
+        </script>
+
+        <script src="js/storage.js"></script>
+        <!-- <script src="js/api.js"></script> -->
+
+        <script src="js/drag.js"></script>
+        <!-- <script src="js/worm.js"></script> -->
+        <script src="js/feed.js"></script>
+        <script src="js/birds.js"></script>
+
+
+
+
+        <script src="js/feedchange.js"></script>
+    </body>
+</html>
+

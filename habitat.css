@@ -1,0 +1,85 @@
+.ground {
+    position: relative;
+}
+
+.earthy {
+    position: relative;
+    z-index: 10; /* 确保在最上层 */
+    width: 100px;
+    height: auto;
+    cursor: pointer;
+    /* 临时样式，帮助调试 */
+    /* border: 2px solid red; */
+}
+
+.earthworms {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 999; /* 在 earthy 下面 */
+    width: 100px;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(20px);
+}
+
+.hidden {
+    display: none;
+}
+
+.show-earthworms {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 晃动动画 */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+} */
+
+/* Feed的样式和动画 */
+.earthy {
+    display: inline-block; 
+    animation: shake 1s infinite;
+    transition: transform 0.3s, box-shadow 0.3s; 
+}
+
+.earthy:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 0 15px 5px rgba(0, 255, 0, 0.8); 
+}
+
+.earthy:active {
+    transform: scale(1.1); 
+    box-shadow: 0 0 20px 10px rgba(0, 255, 0, 1); 
+}
+
+.earthy:hover {
+    transform: scale(1.05); 
+    filter: brightness(1.2); 
+}
+
+.earthy:active {
+    transform: scale(1.1); 
+    filter: brightness(1.5); 
+} 
+
+div.ground .earthy:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+}
+
+div.ground .earthy:active {
+    transform: scale(1.1);
+    filter: brightness(1.5);
+}
